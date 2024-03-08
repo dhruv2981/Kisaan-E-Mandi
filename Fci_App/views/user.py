@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from Taskify_App.serializers.user import UserSerializer
-from Taskify_App.models.user import User
+from Fci_App.serializers.user import UserSerializer
+from Fci_App.models.user import User
 from rest_framework.permissions import IsAuthenticated
 
 
