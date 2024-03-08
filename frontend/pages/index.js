@@ -1,0 +1,6 @@
+export { default as DealerLogin } from './dealer/DealerLogin'
+export { default as FarmerLogin } from './farmer/FarmerLogin'
+export { default as FarmerHome } from './farmer/FarmerHome'
+export { default as FarmerRegister } from './farmer/FarmerRegister'
+export { default as DealerRegister } from './dealer/DealerRegister'
+export { default as Splash } from './Splash'
