@@ -10,4 +10,5 @@ export const checkLoggedIn = async (navigator) => {
         console.log("nope")
         navigator.navigate("login")
     }
+    return {username : username, id : id}
 }

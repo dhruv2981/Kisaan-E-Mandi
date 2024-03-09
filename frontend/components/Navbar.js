@@ -4,10 +4,11 @@ import { Appbar, List } from 'react-native-paper'
 import { View, StyleSheet, Image } from 'react-native'
 
 
-export default function Navbar() {
+export default function Navbar({navigator}) {
     return (
         <Appbar.Header mode='small' style={{flexDirection : "row", justifyContent : "space-between", backgroundColor : "#66A96B"}}>
             <>
+            <Appbar.BackAction onPress={() => {}} />
             <Appbar.Action icon="hamburger"/>
             <Image source={images['logo']} style={navStyles.logo}/>
             </>

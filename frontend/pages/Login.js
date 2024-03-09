@@ -22,7 +22,7 @@ export default function Login({navigation}) {
             await AsyncStorage.setItem("state", response.state)
             await AsyncStorage.setItem("dealer_type", response.dealer_type)
             await AsyncStorage.setItem("role", response.role)
-            navigation.navigate(response.role === "dealer" ? "ddashboard" : "fdashboard", {name : response.username, city : response.city, dealer_type : response.dealer_type})
+            navigation.navigate(response.role === "dealer" ? "ddashboard" : "fdashboard", {id : response.id, name : response.username, city : response.city, dealer_type : response.dealer_type})
         }
     }
     return (

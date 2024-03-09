@@ -16,6 +16,6 @@ export default globalStyles = StyleSheet.create({
         marginVertical : 8
     },
     textInput : {
-        height : 37.5,
+        height : 27.5,
     }
 })
