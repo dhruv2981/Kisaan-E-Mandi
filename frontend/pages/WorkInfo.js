@@ -8,13 +8,13 @@ import { useCreateUser } from '../hooks/users'
 
 
 export default function WorkInfo({ navigation, route }) {
-    const [info, setInfo] = useState("")
     const [type, setType] = useState("")
     const [passwd, setPasswd] = useState("")
+    const [confirm, setConfirm] = useState("")
     const { userCreator, userCreating } = useCreateUser()
     const handleSubmit = async () => {
         //post here
-        if (info != "" && passwd != "") {
+        if (passwd != "" && passwd == confirm) {
             if (route.params.user.role === "farmer" || (route.params.user.role === "dealer" && type != "")) {
                 try {
                     const userObj = {
@@ -27,7 +27,6 @@ export default function WorkInfo({ navigation, route }) {
                         role : route.params.user.role,
                         dealer_type : (route.params.user.role === "farmer" ? "farmer" : type),
                     }
-                    console.log("hit")
                     console.log(userObj)
                     const res = await userCreator(userObj)
                     console.log(res)
@@ -43,11 +42,7 @@ export default function WorkInfo({ navigation, route }) {
         <View style={{ ...globalStyles.container, maxHeight: 937 }}>
             <Image source={images['logo']} style={imageStyles.logo} />
             <View style={{ alignItems: "center", width: "100%" }}>
-                <Text variant='headlineMedium'>Work Information</Text>
-                <View style={globalStyles.formField}>
-                    <Text style={globalStyles.formLabels}>{route.params.user.role === "farmer" ? "Preference" : "Available Storage"}</Text>
-                    <TextInput style={globalStyles.textInput} mode='outlined' value={info} onChangeText={(txt) => setInfo(txt)} />
-                </View>
+                <Text variant='headlineMedium'>Password</Text>
                 <View style={{ ...globalStyles.formField, display: (route.params.user.role === "farmer" ? "none" : "flex") }}>
                     <Text style={globalStyles.formLabels}>Dealer Type</Text>
                     <TextInput style={globalStyles.textInput} mode='outlined' value={type} onChangeText={(txt) => setType(txt)} />
@@ -55,6 +50,10 @@ export default function WorkInfo({ navigation, route }) {
                 <View style={globalStyles.formField}>
                     <Text style={globalStyles.formLabels}>Password</Text>
                     <TextInput style={globalStyles.textInput} mode='outlined' value={passwd} onChangeText={(txt) => setPasswd(txt)} />
+                </View>
+                <View style={globalStyles.formField}>
+                    <Text style={globalStyles.formLabels}>Reenter Password</Text>
+                    <TextInput style={globalStyles.textInput} mode='outlined' value={confirm} onChangeText={(txt) => setConfirm(txt)} />
                 </View>
                 <Button onPress={handleSubmit} style={{ width: "80%" }} mode='contained'>Done</Button>
                 <View style={{ flexDirection: "row" }}>

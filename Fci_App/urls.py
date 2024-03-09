@@ -1,5 +1,6 @@
 from django.urls import include, path
 from rest_framework import routers
+from Fci_App.views.auth import LoginView
 from Fci_App.views.crop import CropViewSet
 from Fci_App.views.user import UserViewSet
 from Fci_App.views.crop_register import Crop_registerViewSet
@@ -15,6 +16,7 @@ router.register('transactions', TransactionViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('login/', LoginView.as_view()),
     path('auth/', include('rest_framework.urls')),
     
 ]
