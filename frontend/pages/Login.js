@@ -6,6 +6,7 @@ import { View, Image } from 'react-native'
 import { Text, TextInput, Button } from 'react-native-paper'
 import { authURL } from '../urls'
 import axios from 'axios'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login({navigation}) {
     const [ID, setID] = useState("")
@@ -15,12 +16,12 @@ export default function Login({navigation}) {
         if (ID != "" && passwd != "") {
             //login and navigate accordingly 
             const response = (await axios.post(authURL, JSON.stringify({ id: ID, password: passwd }), { headers: { "Content-type": "application/json" } })).data
-            localStorage.setItem("id", response.id)
-            localStorage.setItem("username", response.username)
-            localStorage.setItem("city", response.city)
-            localStorage.setItem("state", response.state)
-            localStorage.setItem("dealer_type", response.dealer_type)
-            localStorage.setItem("role", response.role)
+            await AsyncStorage.setItem("id", response.id)
+            await AsyncStorage.setItem("username", response.username)
+            await AsyncStorage.setItem("city", response.city)
+            await AsyncStorage.setItem("state", response.state)
+            await AsyncStorage.setItem("dealer_type", response.dealer_type)
+            await AsyncStorage.setItem("role", response.role)
             navigation.navigate(response.role === "dealer" ? "ddashboard" : "fdashboard", {name : response.username, city : response.city, dealer_type : response.dealer_type})
         }
     }
