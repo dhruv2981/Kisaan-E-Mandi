@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, ScrollView } from 'react-native';
 
 
-export default function FarmerHome({navigation, route}) {
+export default function FarmerDashboard({navigation, route}) {
 
     return (
         <View style={styles.container}>

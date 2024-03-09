@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Button, StyleSheet, Text, View, TextInput } from 'react-native';
+import { TextInput, Text, Button } from 'react-native-paper';
+import { StyleSheet, View } from 'react-native';
 
 
 export default function LoginPage({ navigation, route }) {
@@ -12,14 +13,13 @@ export default function LoginPage({ navigation, route }) {
     }
     return (
         <View style={styles.container}>
-            <Text>Register as a Farmer</Text>
-            <TextInput style={{ height: 40 }} placeholder='Enter your Kisan ID' onChangeText={(newText) => setID(newText)} defaultValue='' />
-            <TextInput style={{ height: 40 }} placeholder='Enter your password' onChangeText={(newText) => setPassword(newText)} defaultValue='' />
-            <TextInput style={{ height: 40 }} placeholder='Re enter your password' onChangeText={(newText) => setConfirm(newText)} defaultValue='' />
+            <Text variant='displayMedium'>Register as a Farmer</Text>
+            <TextInput style={{ height: 40 }} placeholder='Enter your Kisan ID' value={ID} onChangeText={(newText) => setID(newText)} />
+            <TextInput style={{ height: 40 }} placeholder='Enter your password' value={password} onChangeText={(newText) => setPassword(newText)} />
+            <TextInput style={{ height: 40 }} placeholder='Re enter your password' value={confirm} onChangeText={(newText) => setConfirm(newText)} />
             <Button
-                title='register'
                 onPress={handleSubmit}
-            />
+            >Register</Button>
         </View>
     )
 }
