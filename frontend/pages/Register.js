@@ -19,7 +19,7 @@ export default function Register({navigation}) {
             //forward parameters to next route
             const user = {
                 first_name : fname,
-                lname : lname,
+                last_name : lname,
                 id : ID,
                 city : city,
                 state : state

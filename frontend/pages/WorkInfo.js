@@ -4,22 +4,57 @@ import imageStyles from '../imagestyles'
 import globalStyles from '../globals'
 import { Image, View } from 'react-native'
 import { Button, Text, TextInput } from 'react-native-paper'
+import { useCreateUser } from '../hooks/users'
 
 
 export default function WorkInfo({ navigation, route }) {
     const [info, setInfo] = useState("")
-    const handleSubmit = () => {
+    const [type, setType] = useState("")
+    const [passwd, setPasswd] = useState("")
+    const { userCreator, userCreating } = useCreateUser()
+    const handleSubmit = async () => {
         //post here
-        navigation.navigate('login')
+        if (info != "" && passwd != "") {
+            if (route.params.user.role === "farmer" || (route.params.user.role === "dealer" && type != "")) {
+                try {
+                    const userObj = {
+                        username : route.params.user.first_name + "_" + route.params.user.last_name,
+                        //ouch
+                        password : passwd,
+                        city : route.params.user.city,
+                        state : route.params.user.state,
+                        id : route.params.user.id,
+                        role : route.params.user.role,
+                        dealer_type : (route.params.user.role === "farmer" ? "farmer" : type),
+                    }
+                    console.log("hit")
+                    console.log(userObj)
+                    const res = await userCreator(userObj)
+                    console.log(res)
+                    navigation.navigate('login', {})
+                }
+                catch (error) {
+                    console.log(error)
+                }
+            }
+        }
     }
     return (
-        <View style={{ ...globalStyles.container, maxHeight : 937}}>
+        <View style={{ ...globalStyles.container, maxHeight: 937 }}>
             <Image source={images['logo']} style={imageStyles.logo} />
-            <View style={{ alignItems: "center", width : "100%" }}>
+            <View style={{ alignItems: "center", width: "100%" }}>
                 <Text variant='headlineMedium'>Work Information</Text>
                 <View style={globalStyles.formField}>
                     <Text style={globalStyles.formLabels}>{route.params.user.role === "farmer" ? "Preference" : "Available Storage"}</Text>
                     <TextInput style={globalStyles.textInput} mode='outlined' value={info} onChangeText={(txt) => setInfo(txt)} />
+                </View>
+                <View style={{ ...globalStyles.formField, display: (route.params.user.role === "farmer" ? "none" : "flex") }}>
+                    <Text style={globalStyles.formLabels}>Dealer Type</Text>
+                    <TextInput style={globalStyles.textInput} mode='outlined' value={type} onChangeText={(txt) => setType(txt)} />
+                </View>
+                <View style={globalStyles.formField}>
+                    <Text style={globalStyles.formLabels}>Password</Text>
+                    <TextInput style={globalStyles.textInput} mode='outlined' value={passwd} onChangeText={(txt) => setPasswd(txt)} />
                 </View>
                 <Button onPress={handleSubmit} style={{ width: "80%" }} mode='contained'>Done</Button>
                 <View style={{ flexDirection: "row" }}>

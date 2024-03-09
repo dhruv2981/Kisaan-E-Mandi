@@ -3,17 +3,18 @@ from django.db import models
 
 class User(models.Model):
     user_roles = [
-        ('kisan', 'kisan'),
+        ('farmer', 'farmer'),
         ('dealer', 'dealer')
     ]
     
     dealer_types = [
         ('private', 'private'),
         ('govt', 'govt'),
-        ('kisan', 'kisan')
+        ('farmer', 'farmer')
     ]
 
-    username = models.CharField(max_length=60,unique=True)
+    id = models.CharField(max_length=60, primary_key=True)
+    username = models.CharField(max_length=60)
     password= models.CharField(max_length=60)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)

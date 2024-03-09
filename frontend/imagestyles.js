@@ -50,5 +50,8 @@ export default imageStyles = StyleSheet.create({
         top: 709,
         left: -10,
     },
+    hay : {
+        
+    }
 })
 
