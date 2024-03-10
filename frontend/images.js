@@ -8,5 +8,8 @@
         market : require('./assets/market.svg'),
         tractor : require('./assets/tractor.svg'),
         hay : require('./assets/hay.svg'),
-        profile : require("./assets/avatar.svg")
+        profile : require("./assets/avatar.svg"),
+        ellispe : require("./assets/ellipse.svg"),
+        greenbar : require("./assets/greenbar.svg"),
+        photo : require("./assets/1.svg"),
     }

@@ -1,37 +1,65 @@
 import React from "react";
 import images from "../images";
 import { Appbar, List } from "react-native-paper";
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet, Image, Text } from "react-native";
 
 export default function Storage() {
   return (
-    <View styles={stoStyles.storage}>
-        <Text ></Text>
+    <View
+      style={{
+        backgroundColor: "#C5F5C2",
+        width: 405,
+        height: 140,
+        borderRadius: 8,
+        display: "flex",
+        gap: 20,
+        alignItems: "center",
+      }}
+    >
+      <View>
+        <Text>Your storage available</Text>
+      </View>
+      <Image source={images["greenbar"]} style={stoStyles.bar} />
+      <View style={{ flex: 1, gap: 20, flexDirection: "row" }}>
+        <View style={{ display: "flex", flexDirection: "row" }}>
+          <Image source={images["ellispe"]} style={stoStyles.logo} />
+          <Text>Storage used: 25Qt</Text>
+        </View>
+        <View style={{ display: "flex", flexDirection: "row" }}>
+          <Image source={images["ellispe"]} style={stoStyles.logo} />
+          <Text>Storage in deal: 50Qt</Text>
+        </View>
+      </View>
+      <View
+        style={{
+          flex: 1,
+          gap: 20,
+          justifyItems: "space-between",
+          flexDirection: "row",
+        }}
+      >
+        <View style={{ display: "flex", flexDirection: "row" }}>
+          <Image source={images["ellispe"]} style={stoStyles.logo} />
+          <Text>Free storage : 25Qt</Text>
+        </View>
+        <View style={{ display: "flex", flexDirection: "row" }}>
+          <Image source={images["ellispe"]} style={stoStyles.logo} />
+          <Text>Total storage : 100Qt</Text>
+        </View>
+      </View>
     </View>
-     
   );
 }
 const stoStyles = StyleSheet.create({
-  storage: {
-    width: 405,
-    height: 167,
-    top: 104,
-    left: 13,
-    borderRadius: 8,
-    color:C5F5C2,
-  },
   logo: {
-    position: "absolute",
-    top: 4,
-    left: 55,
-    width: 128,
-    height: 46,
+    width: 16,
+    height: 16,
   },
-  profile: {
-    position: "absolute",
-    width: 40,
-    height: 40,
-    top: 7,
-    left: 374,
+  bar: {
+    width: 350,
+    height: 10,
+    display: "flex",
+    alignItems: "center",
+    borderRadius: 20,
   },
 });

@@ -4,66 +4,57 @@ import globalStyles from "../globals";
 import imageStyles from "../imagestyles";
 import { View, StyleSheet } from "react-native";
 import { FAB, Modal, Portal, Text, List, TextInput } from "react-native-paper";
-import { Navbar } from "../components";
 import { checkLoggedIn } from "../utils";
-import { Storage } from "./../components"
+import { Storage ,Card ,Navbar } from "./../components";
+import {
+  useCreateListing,
+  useListingsFarmer,
+  useListingsAll,
+} from "../hooks/listing";
 
 const DealerDashboard = ({ navigation }) => {
   const containerStyle = { backgroundColor: "white", padding: 20 };
+  const [currName, setCurrName] = useState("");
+  const [currID, setCurrID] = useState("");
+  //  const { crops, error, isLoading } = useCrops();
+  //  const { listingCreator, listingCreating } = useCreateListing();
+  const { listings } = useListingsAll();
+  //  console.log(listings);
   useEffect(() => {
-    checkLoggedIn(navigation);
+    (async () => {
+      const { username, id } = await checkLoggedIn(navigation);
+      setCurrName(username);
+      setCurrID(id);
+    })();
   }, []);
-//   const [open, setOpen] = useState(false);
+  //  const [open, setOpen] = useState(false);
+  //  const [crop, setCrop] = useState("");
+  //  const [quantity, setQuantity] = useState("");
+  //  const [recipient, setRecipient] = useState("");
   return (
-    <View style={{}}>
-        <Storage/>
-      {/* <Navbar />
-      <Portal>
-        <Modal
-          style={{ alignItems: "center" }}
-          visible={open}
-          contentContainerStyle={containerStyle}
-          onDismiss={() => setOpen(false)}
-        >
-          <Text variant="headlineSmall">Add crop for sale</Text>
-          <View>
-            <Text style={globalStyles.formLabels}>Crop</Text>
-            <TextInput style={{ backgroundColor: "#C5F5C2" }} />
-          </View>
-          <View>
-            <Text style={globalStyles.formLabels}>Crop</Text>
-            <TextInput style={{ backgroundColor: "#C5F5C2" }} />
-          </View>
-          <View>
-            <Text style={globalStyles.formLabels}>Wuantity</Text>
-            <TextInput style={{ backgroundColor: "#C5F5C2" }} />
-          </View>
-          <View>
-            <Text style={globalStyles.formLabels}>Date of harvest</Text>
-            <TextInput style={{ backgroundColor: "#C5F5C2" }} />
-          </View>
-          <View>
-            <Text style={globalStyles.formLabels}>Send to</Text>
-            <TextInput style={{ backgroundColor: "#C5F5C2" }} />
-          </View>
-        </Modal>
-      </Portal>
-      <FAB
-        icon="plus"
-        label="List crop"
-        style={styles.fab}
-        onPress={() => setOpen(true)}
-      /> */}
+    <View style={{ display: "flex" }}>
+      <Navbar />
+      <View style={styles.dealer}>
+        <Text variant="headlineMedium">Welcome, {currName}</Text>
+        <Storage />
+        <Text variant="headlineMedium">Farmer's available</Text>
+        <Card/>
+      </View>
     </View>
   );
 };
 
-export default DealerDashboard
+export default DealerDashboard;
 
 const styles = StyleSheet.create({
-  fab: {
+  dealer: {
     position: "absolute",
-    top: 780,
-    left: 316,
+    width: 430,
+    height: 937,
+    flex: 1,
+    flexDirection: "column",
+    alignItems: "center",
+    gap: 15,
+    top: 65,
   },
 });
