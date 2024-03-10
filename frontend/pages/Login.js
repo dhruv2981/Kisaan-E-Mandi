@@ -13,6 +13,7 @@ export default function Login({navigation}) {
     const [passwd, setPasswd] = useState("")
     const handleLogin = async () => {
         //navigate to dashboard after logging in and checking whether farmer or dealer
+        await AsyncStorage.clear();
         if (ID != "" && passwd != "") {
             //login and navigate accordingly 
             const response = (await axios.post(authURL, JSON.stringify({ id: ID, password: passwd }), { headers: { "Content-type": "application/json" } })).data
