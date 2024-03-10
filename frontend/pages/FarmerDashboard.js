@@ -37,7 +37,7 @@ const FarmerDashboard = ({ navigation, route }) => {
   const [recipient, setRecipient] = useState("")
   const handlePending = async (id, dealer, farmer, crop_register, price, status, created_at) => {
     try {
-      const response = await transactionUpdater({id : id, dealer : dealer, farmer : farmer, crop_register : crop_register, price : price, status : status, created_at : created_at})
+      const response = await transactionUpdater({id : id, dealer : dealer.id, farmer : farmer.id, crop_register : crop_register.id, price : price, status : status, created_at : created_at})
       console.log(response)
     } catch (error) {
       console.log(error)
@@ -136,7 +136,7 @@ const FarmerDashboard = ({ navigation, route }) => {
             <Text></Text>
           </Card.Content>
           <Card.Content>
-            <Text variant='titleMedium' style={{ color: "#128100", marginBottom : 8 }}>You get : Rs ${deal.price * deal.crop_register.quantity}</Text>
+            <Text variant='titleMedium' style={{ color: "#128100", marginBottom : 8 }}>You get : Rs {deal.price * deal.crop_register.quantity}</Text>
             <Chip style={{ backgroundColor: statusColor}}>{statusDisplay}</Chip>
           </Card.Content>
         </Card.Content>
@@ -214,8 +214,8 @@ export default FarmerDashboard
 const styles = StyleSheet.create({
   fab: {
     position: 'absolute',
-    top: 780,
-    left: 316,
+    bottom : 0,
+    right : 0,
   },
   cards: {
     backgroundColor: "#C5F5C2",

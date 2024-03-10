@@ -45,8 +45,8 @@ export default function App() {
       <PaperProvider theme={theme}>
         <NavigationContainer>
           <Stack.Navigator>
-            <Stack.Screen name="login" component={Login} />
             <Stack.Screen name="loading" component={Loading} />
+            <Stack.Screen name="login" component={Login} />
             <Stack.Screen name="fdashboard" component={FarmerDashboard} />
             <Stack.Screen name="ddashboard" component={DealerDashboard} />
             <Stack.Screen name="register" component={Register} />

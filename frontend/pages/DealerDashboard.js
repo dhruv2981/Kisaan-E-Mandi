@@ -75,7 +75,7 @@ const DealerDashboard = ({ navigation }) => {
   //  const [recipient, setRecipient] = useState("");
   return (
     <ScrollView style={{ display: "flex" }}>
-      <Navbar />
+      <Navbar navigator={navigation} />
       <View style={styles.dealer}>
         <Text variant="headlineMedium">Welcome, {currName}</Text>
         <Storage />
