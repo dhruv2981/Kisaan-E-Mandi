@@ -21,7 +21,6 @@ urlpatterns = [
     path('', include(router.urls)),
     path('login/', LoginView.as_view()),
     # path('crop_registers/<slug:fid>/', CropListingByUser.as_view()),
-    path('auth/', include('rest_framework.urls')),
-    
+    path('auth/', include('rest_framework.urls')),  
 ]
 

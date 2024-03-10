@@ -135,7 +135,7 @@ const Card = ({ name, crop, quantity, city, id, farmerId }) => {
             <Text>{name}name</Text>
           </View>
 
-          <Text>
+          <Text variant="bodyMedium">
             Quantity-:{quantity} kg {crop}
           </Text>
           <Text>MSP:</Text>

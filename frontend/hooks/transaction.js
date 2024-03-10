@@ -11,14 +11,16 @@ export const useCreateTransaction = () => {
   };
 };
 
-export const useTransactions= () => {
-  const {data : transactions, error, isLoading} = useSWR(readOnlyURL, fetcher)
+
+export const useTransactions = () => {
+  const { data, error, isLoading } = useSWR(readOnlyURL, fetcher);
   return {
-    transactions,
+    transactions: data,
     error,
-    isLoading
-  }
-}
+    isLoading,
+  };
+};
+
 
 export const useUpdateTransaction = () => {
   const { trigger, isMutating } = useSWRMutation(transactionsURL, updater);
@@ -26,4 +28,6 @@ export const useUpdateTransaction = () => {
     transactionUpdater: trigger,
     transactionUpdating: isMutating,
   };
-}
+
+};
+

@@ -18,9 +18,11 @@ class Transaction(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
     price = models.IntegerField(max_length=10)
     crop_register = models.ForeignKey(Crop_register, on_delete=models.CASCADE)
-    deal_Date= models.DateTimeField()
+    # deal_Date= models.DateTimeField(null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
-    delivery_date = models.DateTimeField()
-    
+
+
+
+
     def __str__(self):
         return f"Transaction: {self.pk} - Farmer: {self.farmer.username} - Dealer: {self.dealer.username} - Status: {self.status}"

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from Fci_App.models.transaction import Transaction
-from Fci_App.serializers.user import UserSerializer
-from Fci_App.serializers.crop_register import Crop_registerSerializer
+from Fci_App.serializers import UserSerializer, Crop_registerSerializer
+
 
 
 
@@ -12,6 +12,7 @@ class TransactionSerializer(serializers.ModelSerializer):
         model = Transaction
         fields = '__all__'
 
+
 class TransactionVerboseSerializer(serializers.ModelSerializer):
     # projects = ProjectOnlySerializer(many=True,read_only=True)
     dealer = UserSerializer(read_only=True)
@@ -20,7 +21,10 @@ class TransactionVerboseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Transaction
-        fields = ['id', 'dealer', 'farmer', 'status', 'price', 'crop_register', 'deal_Date', 'created_at', 'delivery_date']
+        fields = ['id', 'dealer', 'farmer', 'status', 'price', 'crop_register', 'created_at']
+
        
+
+
 
     
