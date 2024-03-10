@@ -6,7 +6,7 @@ from Fci_App.views.crop import CropViewSet
 from Fci_App.views.user import UserViewSet
 from Fci_App.views.crop_register import Crop_registerViewSet
 # ,CropListingByUser
-from Fci_App.views.transaction import TransactionViewSet
+from Fci_App.views.transaction import TransactionViewSet, TransactionReadOnlyViewSet
 
 
 
@@ -15,6 +15,7 @@ router.register('users', UserViewSet)
 router.register('crops', CropViewSet)
 router.register('crop_registers', Crop_registerViewSet)
 router.register('transactions', TransactionViewSet)
+router.register('readonly', TransactionReadOnlyViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

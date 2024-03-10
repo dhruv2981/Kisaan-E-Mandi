@@ -9,5 +9,9 @@ from Fci_App.models.transaction import Transaction
 
 class TransactionViewSet(viewsets.ModelViewSet):
     queryset = Transaction.objects.all()
-    serializer_class = TransactionVerboseSerializer
+    serializer_class = TransactionSerializer
     # permission_classes = [IsAuthenticated]
+
+class TransactionReadOnlyViewSet(viewsets.ModelViewSet):
+    queryset = Transaction.objects.all()
+    serializer_class = TransactionVerboseSerializer
