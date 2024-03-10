@@ -14,6 +14,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const FarmerDashboard = ({ navigation, route }) => {
+  console.log(navigation)
   const containerStyle = { backgroundColor: 'white', padding: 20 };
   const [currName, setCurrName] = useState("")
   const [selectedList, setSelectedList] = useState("Dashboard")
@@ -149,7 +150,7 @@ const FarmerDashboard = ({ navigation, route }) => {
   })
   return (
     <View style={{}}>
-      <Navbar setSelected={setSelectedList}/>
+      <Navbar navigator={navigation} setSelected={setSelectedList}/>
       <Text variant='headlineMedium' style={{ marginLeft: 8, marginTop: 8 }}>Welcome, {currName}</Text>
       <View style={{ padding: 16 , display : selectedList === "Your crops" || selectedList === "Dashboard" ? "block" : "none"}}>
         <Text variant='headlineSmall' style={{ marginLeft: 8, marginTop: 8 }}>Your crops</Text>

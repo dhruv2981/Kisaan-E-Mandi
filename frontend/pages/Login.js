@@ -16,6 +16,8 @@ export default function Login({navigation}) {
         if (ID != "" && passwd != "") {
             //login and navigate accordingly 
             const response = (await axios.post(authURL, JSON.stringify({ id: ID, password: passwd }), { headers: { "Content-type": "application/json" } })).data
+            setID("")
+            setPasswd("")
             await AsyncStorage.setItem("id", response.id)
             await AsyncStorage.setItem("username", response.username)
             await AsyncStorage.setItem("city", response.city)
