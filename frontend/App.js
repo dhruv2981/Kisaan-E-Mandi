@@ -23,6 +23,7 @@ export default function App() {
         <Stack.Navigator>
 
 
+          <Stack.Screen name="login" component={Login} />
           <Stack.Screen name="loading" component={Loading} />
           <Stack.Screen name="fdashboard" component={FarmerDashboard} />
           <Stack.Screen name="ddashboard" component={DealerDashboard} />
@@ -30,7 +31,6 @@ export default function App() {
           <Stack.Screen name="switch" component={Splash} />
           <Stack.Screen name="workinfo" component={WorkInfo} />
 
-          <Stack.Screen name="login" component={Login} />
   
 
         </Stack.Navigator>

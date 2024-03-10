@@ -5,7 +5,6 @@ import { View, StyleSheet, Image, Text,TextInput } from "react-native";
 import { Button } from "@rneui/themed";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import globalStyles from "../globals";
-
 import {
   useCreateTransaction,
   useTransactionsFarmer,
@@ -62,31 +61,33 @@ import {
 //     );
 // }
 
-const OfferPrice = ({transaction}) => {
+const OfferPrice = ({transaction,openEditPrice,setOpenEditPrice}) => {
   //neeed farmer id , name , dealer id , city , quantity , crop name , crop register id , saara crop register object
 
-//   const openSetPrice = () => {};
-const [error, setError] = useState(null);
-    const containerStyle = { backgroundColor: "white", padding: 20 };
-  const [openEditPrice, setOpenEditPrice] = useState(false);
+  //   const openSetPrice = () => {};
+  const [error, setError] = useState(null);
+  const { transactionCreator, transactionCreating } = useCreateTransaction();
+  
+
+  const containerStyle = { backgroundColor: "white", padding: 20 };
+  // const [openEditPrice, setOpenEditPrice] = useState(false);
   const [offerPrice, setOfferPrice] = useState("");
 
-  const handleSubmit=async()=>{
-        if(offerPrice <transaction.price){
-            setError("Price must be greater than msp");
-        }
-
-         const updatedTransaction = {
-            ...transaction,
-            price: offerPrice,
-        };
-
-        const response = await useTransactionCreator(transaction);
-        console.log(response);
+  const handleSubmit = async () => {
+    if (offerPrice < transaction.price) {
+      setError("Price must be greater than msp");
     }
 
+    const updatedTransaction = {
+      ...transaction,
+      price: offerPrice,
+    };
 
-  
+    const response = await transactionCreator(transaction);
+    console.log(response);
+    setOpenEditPrice(false);
+  };
+
   //handle changes for reject remove offer from list
 
   // const {name}=name;
@@ -104,7 +105,7 @@ const [error, setError] = useState(null);
         contentContainerStyle={containerStyle}
         onDismiss={() => setOpenEditPrice(false)}
       >
-        {error && <Text style={{color:'red'}}>Error: {error}</Text>}
+        {error && <Text style={{ color: "red" }}>Error: {error}</Text>}
         <Text variant="headlineSmall">Offer Price</Text>
         <View style={{ marginVertical: 8 }}>
           <TextInput
@@ -129,7 +130,7 @@ const [error, setError] = useState(null);
           titleStyle={{
             color: "white",
           }}
-          onPress={() => handleSubmit(transaction)}
+          onPress={() => handleSubmit()}
         />
       </Modal>
     </Portal>

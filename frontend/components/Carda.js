@@ -4,7 +4,7 @@ import { Appbar, List, Card } from "react-native-paper";
 import { View, StyleSheet, Image, Text } from "react-native";
 import { Button } from "@rneui/themed";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { OfferPrice } from ".";
+import { OfferPrice } from "./index.js";
 import globalStyles from "../globals";
 import {
   useCreateTransaction,
@@ -65,30 +65,17 @@ import {
 const Carda = ({ listing, msp }) => {
   console.log("lsitindscfwawed", listing);
   const {farmer,id} = listing;
-  const {transactionCreator, transactionCreating} = useCreateTransaction()
+  const {transactionCreator, transactionCreating} = useCreateTransaction();
 
   const openSetPrice = () => {};
   const [openEditPrice, setOpenEditPrice] = useState(false);
   const [transaction, setTransaction] = useState("");
   const [currId, setCurrId] = useState("");
+  const [display, setDisplay] = useState(true)
   const [dealerType, setDealerType] = useState("")
 
 
-  // const farmerDoneDeals =
-  //   currID != "" &&
-  //   transactions &&
-  //   transactions.filter((trans) => {
-  //     //exploits the fact that status has only 6 possible states
-  //     console.log(`id is : ${currID}`);
-  //     console.log(trans.farmer.id);
-  //     console.log(trans.status);
-  //     return (
-  //       trans.farmer.id === currID &&
-  //       (trans.status === "deal_done" ||
-  //         trans.status === "delivered" ||
-  //         trans.status === "payment_done")
-  //     );
-  //   });
+
 
   const handleAccept = async (farmer,id, msp) => {
     // const currDealer= await AsyncStorage.getItem("Id");
@@ -112,6 +99,7 @@ const Carda = ({ listing, msp }) => {
     console.log("jaa")
     const response = await transactionCreator(transaction);
     console.log(response);
+    setDisplay(false)
   };
 
   useEffect(() => {
@@ -125,8 +113,8 @@ const Carda = ({ listing, msp }) => {
 
   return (
     <Card
-      key={listing.id}
-      style={{ backgroundColor: "#C5F5C2", width: 360, marginBottom: 16 }}
+      key={listing.id} 
+      style={{ backgroundColor: "#C5F5C2", width: 360, marginBottom: 16, display : display ? "block" : "none"}}
     >
       <Card.Content
         style={{ flexDirection: "row", justifyContent: "space-between" }}
@@ -185,6 +173,7 @@ const Carda = ({ listing, msp }) => {
             borderRadius: 10,
           }}
           titleStyle={{ color: "white" }}
+          onPress={() => setDisplay(false)}
         />
 
         <Button
@@ -203,7 +192,7 @@ const Carda = ({ listing, msp }) => {
           onPress={() => handleAccept(farmer, id, msp )}
         />
       </View>
-      <OfferPrice transaction={transaction} />
+      <OfferPrice transaction={transaction} openEditPrice={openEditPrice} setOpenEditPrice={setOpenEditPrice} />
     </Card>
   );
 };
