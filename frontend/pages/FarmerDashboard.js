@@ -3,7 +3,7 @@ import images from '../images'
 import globalStyles from '../globals'
 import imageStyles from '../imagestyles'
 import { View, StyleSheet } from 'react-native'
-import { FAB, Modal, Portal, Text, SegmentedButtons, TextInput, Button } from 'react-native-paper'
+import { FAB, Modal, Portal, Text, SegmentedButtons, TextInput, Button, Card } from 'react-native-paper'
 import { Navbar } from '../components'
 import { checkLoggedIn } from '../utils'
 import { useCreateListing, useListingsFarmer, useListingsAll } from '../hooks/listing'
@@ -17,11 +17,11 @@ const FarmerDashboard = ({ navigation, route }) => {
   const [currID, setCurrID] = useState("")
   const { crops, error, isLoading } = useCrops()
   const { listingCreator, listingCreating } = useCreateListing();
-  const {listings} = useListingsAll();
+  const { listings } = useListingsAll();
   console.log(listings)
   useEffect(() => {
     (async () => {
-      const {username, id} = await checkLoggedIn(navigation)
+      const { username, id } = await checkLoggedIn(navigation)
       setCurrName(username)
       setCurrID(id)
     })()
@@ -49,7 +49,7 @@ const FarmerDashboard = ({ navigation, route }) => {
         const currFarmer = await AsyncStorage.getItem("id")
         const currFarmerName = await AsyncStorage.getItem("username")
         const currCity = await AsyncStorage.getItem("city")
-        const response = await listingCreator({ farmer: currFarmer, quantity: quantity, name: crop, dealer_type: recipient, farmer_name : currFarmerName, farmer_city : currCity });
+        const response = await listingCreator({ farmer: currFarmer, quantity: quantity, name: crop, dealer_type: recipient, farmer_name: currFarmerName, farmer_city: currCity });
         console.log(response)
         setOpen(false)
       }
@@ -58,10 +58,39 @@ const FarmerDashboard = ({ navigation, route }) => {
       }
     }
   }
+  //filter listings for the ones made by current farmer
+  const farmerListings = listings && listings.filter((listing) => listing.farmer === currID)
+  const displayListings = farmerListings && farmerListings.map(listing => {
+    let cropMSP
+    crops && crops.forEach(crop => {
+      if (crop.name === listing.name) {
+        cropMSP = crop.msp
+      }
+    })
+    return (
+      <Card key={listing.id} style={{ backgroundColor: "#C5F5C2", width: "80%", marginBottom : 16 }}>
+        <Card.Content style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          <Text variant='bodyMedium'>{listing.name}</Text>
+          <Text variant="bodyLarge" style={{ color: "#128100" }}>By MSP : Rs {cropMSP * listing.quantity}</Text>
+        </Card.Content>
+        <Card.Content>
+          <Text variant='bodyMedium'>Quantity : {listing.quantity}</Text>
+          <Text variant='bodySmall'>MSP  : {cropMSP} rupees per kg</Text>
+        </Card.Content>
+      </Card>
+    )
+  })
+  console.log(farmerListings)
   return (
     <View style={{}}>
       <Navbar />
-      <Text variant='headlineMedium'>Welcome, ${currName}</Text>
+      <Text variant='headlineMedium' style={{ marginLeft: 8, marginTop: 8 }}>Welcome, {currName}</Text>
+      <View style={{padding : 16}}>
+        <Text variant='headlineSmall' style={{marginLeft : 8, marginTop : 8}}>Your crops</Text>
+        <View style={{ alignItems: "center" , width : "100%", marginTop : 16}}>
+          {displayListings}
+        </View>
+      </View>
       <Portal>
         <Modal style={{ alignItems: "center" }} visible={open} contentContainerStyle={containerStyle} onDismiss={() => setOpen(false)}>
           <Text variant='headlineSmall'>Add crop for sale</Text>
