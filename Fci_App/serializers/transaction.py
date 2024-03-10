@@ -4,6 +4,7 @@ from Fci_App.serializers import UserSerializer, Crop_registerSerializer
 
 
 
+
 class TransactionSerializer(serializers.ModelSerializer):
     # projects = ProjectOnlySerializer(many=True,read_only=True)
 
@@ -21,6 +22,7 @@ class TransactionVerboseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
         fields = ['id', 'dealer', 'farmer', 'status', 'price', 'crop_register', 'created_at']
+
        
 
 
