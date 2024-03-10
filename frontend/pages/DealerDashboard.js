@@ -103,7 +103,6 @@ const DealerDashboard = ({ navigation }) => {
               farmerDoneDeals.map((deal, index) => {
                 let statusDisplay = "";
                 let statusColor = "";
-
                 if (deal.status === "deal_done") {
                   statusDisplay = "To be delivered";
                   statusColor = "#128100";
@@ -112,10 +111,8 @@ const DealerDashboard = ({ navigation }) => {
                   statusColor = "#128100";
                 } else if (deal.status === "payment_done") {
                   statusDisplay = "Payment Done";
-                  statusColor = "#B4B800";
+                  statusColor = "#128100";
                 }
-               
-
                 return (
                   <TransactionCard
                     deal={deal}
