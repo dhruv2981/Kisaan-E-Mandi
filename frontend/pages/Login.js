@@ -33,7 +33,7 @@ export default function Login({navigation}) {
             <Image source={images['logo']} style={imageStyles.logo} />
             <View style={{ justifyContent: "space-around", width: "100%", alignItems: "center" }}>
                 <Text variant='headlineMedium'>Log in to your account</Text>
-                <TextInput style={{ width: "80%", backgroundColor: "#ffff" }} value={ID} onChangeText={(txt) => setID(txt)} placeholder='Kisaan ID/Aadhar Number'></TextInput>
+                <TextInput style={{ width: "80%", backgroundColor: "#ffff" }} value={ID} onChangeText={(txt) => setID(txt)} placeholder='Kisaan ID/Dealer ID'></TextInput>
                 <TextInput style={{ width: "80%", backgroundColor: "#ffff" }} value={passwd} onChangeText={(txt) => setPasswd(txt)} placeholder='Password'></TextInput>
                 <Button style={{ marginTop: 12 }} mode='contained' onPress={handleLogin}>Login</Button>
             </View>

@@ -19,6 +19,7 @@ const theme = {
 
 export default function App() {
   return (
+
     <SWRConfig
       value={{
         provider: () => new Map(),
@@ -56,6 +57,7 @@ export default function App() {
         </NavigationContainer>
       </PaperProvider>
     </SWRConfig >
+
 
   );
 }
