@@ -18,3 +18,10 @@ The backend runs on the Django framework.
 ### Backend
 - make the necessary migrations.
 - ```python3 manage.py runserver``` to run the server on ```http://localhost:8000```
+
+### Drive Video and PPt link
+https://drive.google.com/drive/u/1/folders/1KLtSLUNiQGWbh5J54YURLbMXncXK0cnK
+
+### Figma Link
+https://www.figma.com/file/M3ZO5rm3ws3reUrXSrPHUG/Kisaan-E-Mandi-App?type=design&node-id=0%3A1&mode=design&t=tXI7HYu5qj9O0imB-1
+

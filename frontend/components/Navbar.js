@@ -5,14 +5,14 @@ import { View, StyleSheet, Image } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-export default function Navbar({ navigatior, setSelected }) {
+export default function Navbar({ navigator, setSelected }) {
     const [ham, setHam] = useState(false)
     const handleHamburger = () => {
         setHam(!ham)
     }
     const handleLogout = async () => {
         await AsyncStorage.clear()
-        navigatior.navigate("login")
+        navigator.navigate("login")
     }
     return (
         <Appbar.Header mode='small' style={{ flexDirection: "row", justifyContent: "space-between", backgroundColor: "#66A96B" }}>
