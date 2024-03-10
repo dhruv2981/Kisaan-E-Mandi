@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import images from '../images'
 import globalStyles from '../globals'
 import imageStyles from '../imagestyles'
-import { View, StyleSheet, Image } from 'react-native'
+import { ScrollView, View, StyleSheet, Image } from 'react-native'
 import { FAB, Modal, Portal, Text, SegmentedButtons, TextInput, Button, Card, Menu, Chip } from 'react-native-paper'
 import { Navbar } from '../components'
 import FarmerPendingCard from '../components/FarmerPendingCard'
@@ -35,9 +35,9 @@ const FarmerDashboard = ({ navigation, route }) => {
   const [crop, setCrop] = useState("")
   const [quantity, setQuantity] = useState("")
   const [recipient, setRecipient] = useState("")
-  const handlePending = async (id, dealer, farmer, crop_register, price, status, deal_Date, created_at, delivery_date) => {
+  const handlePending = async (id, dealer, farmer, crop_register, price, status, created_at) => {
     try {
-      const response = await transactionUpdater({id : id, dealer : dealer, farmer : farmer, crop_register : crop_register, price : price, status : status, deal_Date : deal_Date, delivery_date : delivery_date, created_at : created_at})
+      const response = await transactionUpdater({id : id, dealer : dealer.id, farmer : farmer.id, crop_register : crop_register.id, price : price, status : status, created_at : created_at})
       console.log(response)
     } catch (error) {
       console.log(error)
@@ -109,7 +109,7 @@ const FarmerDashboard = ({ navigation, route }) => {
     let statusColor = ""
     if (deal.status === "deal_done") {
       statusDisplay = "To be delivered"
-      statusColor = "#128100"
+      statusColor = "#B4B800"
     }
 
     if (deal.status === "delivered") {
@@ -118,7 +118,7 @@ const FarmerDashboard = ({ navigation, route }) => {
     }
     if (deal.status === "payment_done") {
       statusDisplay = "Payment Done"
-      statusColor = "#B4B800"
+      statusColor = "#128100"
     }
     return (
       <Card key={deal.id} style={{...styles.cards,  paddingHorizontal : 0 }}>
@@ -136,7 +136,7 @@ const FarmerDashboard = ({ navigation, route }) => {
             <Text></Text>
           </Card.Content>
           <Card.Content>
-            <Text variant='titleMedium' style={{ color: "#128100", marginBottom : 8 }}>You get : Rs ${deal.price * deal.crop_register.quantity}</Text>
+            <Text variant='titleMedium' style={{ color: "#128100", marginBottom : 8 }}>You get : Rs {deal.price * deal.crop_register.quantity}</Text>
             <Chip style={{ backgroundColor: statusColor}}>{statusDisplay}</Chip>
           </Card.Content>
         </Card.Content>
@@ -149,7 +149,7 @@ const FarmerDashboard = ({ navigation, route }) => {
     )
   })
   return (
-    <View style={{}}>
+    <ScrollView style={{}}>
       <Navbar navigator={navigation} setSelected={setSelectedList}/>
       <Text variant='headlineMedium' style={{ marginLeft: 8, marginTop: 8 }}>Welcome, {currName}</Text>
       <View style={{ padding: 16 , display : selectedList === "Your crops" || selectedList === "Dashboard" ? "block" : "none"}}>
@@ -205,7 +205,7 @@ const FarmerDashboard = ({ navigation, route }) => {
         </Modal>
       </Portal>
       <FAB icon="plus" label='List crop' style={styles.fab} onPress={() => setOpen(true)} />
-    </View>
+    </ScrollView>
   )
 }
 
@@ -214,8 +214,8 @@ export default FarmerDashboard
 const styles = StyleSheet.create({
   fab: {
     position: 'absolute',
-    top: 780,
-    left: 316,
+    bottom : 0,
+    right : 0,
   },
   cards: {
     backgroundColor: "#C5F5C2",

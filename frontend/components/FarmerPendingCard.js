@@ -65,7 +65,7 @@ export default function FarmerPendingCard({ deal, handlePending }) {
                     }}
                     onPress={() => 
                         //tragic code
-                        handlePending(id, dealer, farmer, crop_register, price, "rejected", deal_Date, created_at, delivery_date)
+                        handlePending(id, dealer, farmer, crop_register, price, "rejected", created_at)
                     }
                 >Reject</Button>
 
@@ -79,7 +79,7 @@ export default function FarmerPendingCard({ deal, handlePending }) {
                         borderRadius: 10,
                         color: "white",
                     }}
-                    onPress={() => handlePending(id, dealer, farmer, crop_register, price, "deal_done", deal_Date, created_at, delivery_date)
+                    onPress={() => handlePending(id, dealer, farmer, crop_register, price, "deal_done", created_at)
                 }
                 >Accept</Button>
             </View>

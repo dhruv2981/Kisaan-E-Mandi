@@ -75,7 +75,7 @@ const DealerDashboard = ({ navigation }) => {
   //  const [recipient, setRecipient] = useState("");
   return (
     <ScrollView style={{ display: "flex" }}>
-      <Navbar />
+      <Navbar navigator={navigation} />
       <View style={styles.dealer}>
         <Text variant="headlineMedium">Welcome, {currName}</Text>
         <Storage />
@@ -103,7 +103,6 @@ const DealerDashboard = ({ navigation }) => {
               farmerDoneDeals.map((deal, index) => {
                 let statusDisplay = "";
                 let statusColor = "";
-
                 if (deal.status === "deal_done") {
                   statusDisplay = "To be delivered";
                   statusColor = "#128100";
@@ -112,10 +111,8 @@ const DealerDashboard = ({ navigation }) => {
                   statusColor = "#128100";
                 } else if (deal.status === "payment_done") {
                   statusDisplay = "Payment Done";
-                  statusColor = "#B4B800";
+                  statusColor = "#128100";
                 }
-               
-
                 return (
                   <TransactionCard
                     deal={deal}
