@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from Fci_App.serializers.transaction import TransactionSerializer
+from Fci_App.serializers.transaction import TransactionSerializer, TransactionVerboseSerializer
 from Fci_App.models.transaction import Transaction
 # from rest_framework.permissions import IsAuthenticated
 
@@ -9,5 +9,5 @@ from Fci_App.models.transaction import Transaction
 
 class TransactionViewSet(viewsets.ModelViewSet):
     queryset = Transaction.objects.all()
-    serializer_class = TransactionSerializer
+    serializer_class = TransactionVerboseSerializer
     # permission_classes = [IsAuthenticated]

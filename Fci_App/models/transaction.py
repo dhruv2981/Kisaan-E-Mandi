@@ -21,6 +21,6 @@ class Transaction(models.Model):
     deal_Date= models.DateTimeField()
     created_at = models.DateTimeField(default=timezone.now)
     delivery_date = models.DateTimeField()
-
+    
     def __str__(self):
         return f"Transaction: {self.pk} - Farmer: {self.farmer.username} - Dealer: {self.dealer.username} - Status: {self.status}"

@@ -22,13 +22,13 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
 
-          <Stack.Screen name="ddashboard" component={DealerDashboard} />
+          <Stack.Screen name="fdashboard" component={FarmerDashboard} />
           <Stack.Screen name="loading" component={Loading} />
+          <Stack.Screen name="ddashboard" component={DealerDashboard} />
           <Stack.Screen name="register" component={Register} />
           <Stack.Screen name="switch" component={Splash} />
           <Stack.Screen name="workinfo" component={WorkInfo} />
           <Stack.Screen name="login" component={Login} />
-          <Stack.Screen name="fdashboard" component={FarmerDashboard} /
   
         </Stack.Navigator>
       </NavigationContainer>
