@@ -19,46 +19,52 @@ const theme = {
 
 export default function App() {
   return (
-
     <SWRConfig
       value={{
         provider: () => new Map(),
-        isVisible: () => { return true },
+        isVisible: () => {
+          return true;
+        },
         initFocus(callback) {
-          let appState = AppState.currentState
+          let appState = AppState.currentState;
 
           const onAppStateChange = (nextAppState) => {
             /* If it's resuming from background or inactive mode to active one */
-            if (appState.match(/inactive|background/) && nextAppState === 'active') {
-              callback()
+            if (
+              appState.match(/inactive|background/) &&
+              nextAppState === "active"
+            ) {
+              callback();
             }
-            appState = nextAppState
-          }
+            appState = nextAppState;
+          };
 
           // Subscribe to the app state change events
-          const subscription = AppState.addEventListener('change', onAppStateChange)
+          const subscription = AppState.addEventListener(
+            "change",
+            onAppStateChange
+          );
 
           return () => {
-            subscription.remove()
-          }
-        }
-      }}>
+            subscription.remove();
+          };
+        },
+      }}
+    >
       <PaperProvider theme={theme}>
         <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen name="loading" component={Loading} />
+            <Stack.Screen name="register" component={Register} />
+            <Stack.Screen name="workinfo" component={WorkInfo} />
             <Stack.Screen name="login" component={Login} />
             <Stack.Screen name="fdashboard" component={FarmerDashboard} />
             <Stack.Screen name="ddashboard" component={DealerDashboard} />
-            <Stack.Screen name="register" component={Register} />
             <Stack.Screen name="switch" component={Splash} />
-            <Stack.Screen name="workinfo" component={WorkInfo} />
           </Stack.Navigator>
         </NavigationContainer>
       </PaperProvider>
-    </SWRConfig >
-
-
+    </SWRConfig>
   );
 }
 

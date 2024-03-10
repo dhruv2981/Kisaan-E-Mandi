@@ -76,6 +76,7 @@ const OfferPrice = ({transaction,openEditPrice,setOpenEditPrice}) => {
   const handleSubmit = async () => {
     if (offerPrice < transaction.price) {
       setError("Price must be greater than msp");
+      return;
     }
 
     const updatedTransaction = {
